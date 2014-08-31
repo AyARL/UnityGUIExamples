@@ -1,14 +1,33 @@
 UnityGUIExamples
 ================
 (31 Aug 2014)
+
 Scripting examples for the new Unity GUI.
+
 Since the documentation and manual for the GUI system with curent Unity release (4.6.0b18) are still limited, 
-so I am attempting to create some simple examples how to access the new UI from script.
+I am attempting to create some simple examples how to access the new UI from script.
 
 All eamples are in C#.
 
+
+DefaultEvents
+================
+
+(31 Aug 2014)
+
+Shows how to capture default events of:
+
+- Buttons - onClick
+- Toggles - onValueChanged
+- InputFields - onSubmit
+
+Adding and removing Listeners with and without arguments.
+
+Note: If you are adding a listener via script when something is activated, don't forget to put in safeguards that prevent the same listener from being added multiple times. It's best to remove listeners if the element that it refers to is no longer available.
+
 Event Trigger
 ================
+
 (31 Aug 2014)
 
 Shows how to add events to the EventTrigger component at runtime.
@@ -17,4 +36,5 @@ This includes things such as OnPointerEnter, OnPointerExit, OnPointerClick etc.
 Can be used on object that don't support those events at all (eg. plain panels).
 
 Topmost element with the Event Trigger with capture all events.
+
 

@@ -16,6 +16,7 @@ public class ButtonExample : MonoBehaviour
     private Text clickCounterText = null;
 
     UnityAction action = null;
+    
     private int clickCounter = 0;
 
     private void Start()

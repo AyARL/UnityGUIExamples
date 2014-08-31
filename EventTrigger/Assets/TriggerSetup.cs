@@ -27,6 +27,7 @@ public class TriggerSetup : MonoBehaviour
         AddEventTrigger(OnDrag, EventTriggerType.Drag);
         AddEventTrigger(OnDrop, EventTriggerType.Drop);
         AddEventTrigger(OnScroll, EventTriggerType.Scroll);
+
     }
 
 

@@ -37,4 +37,12 @@ Can be used on object that don't support those events at all (eg. plain panels).
 
 Topmost element with the Event Trigger with capture all events.
 
+Tabs
+===============
 
+(31 Aug 2014)
+
+// Original Tab Contol by @digibawb (https://twitter.com/digibawb) - included with permission
+
+Example of a UI panels with tabs. Working control of which panel is active by using the tab buttons.
+Added editor functionality for adding new tabs.

@@ -11,14 +11,17 @@ public class TriggerSetup : MonoBehaviour
     [SerializeField]
     private Text textField = null;
 
+    [SerializeField]
+    private Toggle toggle = null;
+
     // Use this for initialization
     void Start()
     {
         eventTrigger = gameObject.GetComponent<EventTrigger>();
 
         AddEventTrigger(OnPointerClick, EventTriggerType.PointerClick);
-        AddEventTrigger(OnPointerEnter, EventTriggerType.PointerEnter);
-        AddEventTrigger(OnPointerEnter, EventTriggerType.PointerExit);
+        AddEventTrigger(OnPointerEnter, EventTriggerType.PointerEnter, toggle);
+        AddEventTrigger(OnPointerExit, EventTriggerType.PointerExit);
         AddEventTrigger(OnPointerDown, EventTriggerType.PointerDown);
         AddEventTrigger(OnPointerUp, EventTriggerType.PointerUp);
         AddEventTrigger(OnDrag, EventTriggerType.Drag);
@@ -29,11 +32,12 @@ public class TriggerSetup : MonoBehaviour
 
     #region TriggerEventsSetup
 
+    // Use listener with no parameters
     private void AddEventTrigger(UnityAction action, EventTriggerType triggerType)
     {
         // Create a nee TriggerEvent and add a listener
         EventTrigger.TriggerEvent trigger = new EventTrigger.TriggerEvent();
-        trigger.AddListener((eventData) => action()); // you can capture and pass the event data to the listener
+        trigger.AddListener((eventData) => action()); // ignore event data
 
         // Create and initialise EventTrigger.Entry using the created TriggerEvent
         EventTrigger.Entry entry = new EventTrigger.Entry() { callback = trigger, eventID = triggerType };
@@ -42,11 +46,26 @@ public class TriggerSetup : MonoBehaviour
         eventTrigger.delegates.Add(entry);
     }
 
+    // Use listener that uses the BaseEventData passed to the Trigger
     private void AddEventTrigger(UnityAction<BaseEventData> action, EventTriggerType triggerType)
     {
         // Create a nee TriggerEvent and add a listener
         EventTrigger.TriggerEvent trigger = new EventTrigger.TriggerEvent();
-        trigger.AddListener((eventData) => action(eventData)); // you can capture and pass the event data to the listener
+        trigger.AddListener((eventData) => action(eventData)); // capture and pass the event data to the listener
+
+        // Create and initialise EventTrigger.Entry using the created TriggerEvent
+        EventTrigger.Entry entry = new EventTrigger.Entry() { callback = trigger, eventID = triggerType };
+
+        // Add the EventTrigger.Entry to delegates list on the EventTrigger
+        eventTrigger.delegates.Add(entry);
+    }
+
+    // Use listener that uses additional argument
+    private void AddEventTrigger(UnityAction<Toggle> action, EventTriggerType triggerType, Toggle toggle)
+    {
+        // Create a nee TriggerEvent and add a listener
+        EventTrigger.TriggerEvent trigger = new EventTrigger.TriggerEvent();
+        trigger.AddListener((eventData) => action(toggle)); // pass additonal argument to the listener
 
         // Create and initialise EventTrigger.Entry using the created TriggerEvent
         EventTrigger.Entry entry = new EventTrigger.Entry() { callback = trigger, eventID = triggerType };
@@ -65,9 +84,9 @@ public class TriggerSetup : MonoBehaviour
         textField.text = "OnPointerClick " + data.selectedObject;
     }
 
-    private void OnPointerEnter()
+    private void OnPointerEnter(Toggle toggle)
     {
-        textField.text = "OnPointerEnter";
+        textField.text = "OnPointerEnter: Toggle Status " + toggle.isOn;
     }
 
     private void OnPointerExit()

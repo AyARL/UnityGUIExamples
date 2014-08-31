@@ -15,7 +15,7 @@ DefaultEvents
 
 (31 Aug 2014)
 
-Shows how to capture default events of:
+Shows how to subscribe to default events of:
 
 - Buttons - onClick
 - Toggles - onValueChanged

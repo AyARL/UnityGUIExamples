@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// Original Tab Control by Gordon Biggans (https://twitter.com/digibawb)
@@ -11,18 +12,28 @@ using System;
 public class TabControlEntry
 {
     [SerializeField]
-    private GameObject tab = null;
-    public GameObject Tab { get { return tab; } }
+    private GameObject panel = null;
+    public GameObject Panel { get { return panel; } }
 
     [SerializeField]
-    private Button button = null;
-    public Button Button { get { return button; } }
+    private Button tab = null;
+    public Button Tab { get { return tab; } }
 }
 
 public class TabControl : MonoBehaviour
 {
     [SerializeField]
-    private TabControlEntry[] entries = null;
+    private List<TabControlEntry> entries = null;
+
+    [SerializeField]
+    private GameObject panelContainer = null;
+    [SerializeField]
+    private GameObject tabContainer = null;
+
+    [SerializeField]
+    private GameObject tabPrefab = null;
+    [SerializeField]
+    private GameObject panelPrefab = null;
 
     protected virtual void Start()
     {
@@ -31,15 +42,20 @@ public class TabControl : MonoBehaviour
             AddButtonListener(entry);
         }
 
-        if (entries.Length > 0)
+        if (entries.Count > 0)
         {
             SelectTab(entries[0]);
         }
     }
 
+    public void AddEntry(TabControlEntry entry)
+    {
+        entries.Add(entry);
+    }
+
     private void AddButtonListener(TabControlEntry entry)
     {
-        entry.Button.onClick.AddListener(() => SelectTab(entry));
+        entry.Tab.onClick.AddListener(() => SelectTab(entry));
     }
 
     private void SelectTab(TabControlEntry selectedEntry)
@@ -48,8 +64,8 @@ public class TabControl : MonoBehaviour
         {
             bool isSelected = entry == selectedEntry;
 
-            entry.Button.interactable = !isSelected;
-            entry.Tab.SetActive(isSelected);
+            entry.Tab.interactable = !isSelected;
+            entry.Panel.SetActive(isSelected);
         }
     }
 }

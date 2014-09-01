@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class ToggleGroupControl : MonoBehaviour
 {
@@ -27,6 +28,14 @@ public class ToggleGroupControl : MonoBehaviour
             // Assign group to the toggle to enable group logic
             toggle.group = toggleGroup;
         }
+
+        // Set a toggle with the specific value as selected
+        // This can be based on some state so selections persist
+        Toggle first = toggles.FirstOrDefault((t) => t.GetComponent<ToggleValue>().Value == ToggleValue.ToggleValues.value_1);
+        if (first != null)
+        {
+            first.isOn = true;
+        }
     }
 
     private void ToggleStateChanged(Toggle toggle, bool state)
@@ -34,7 +43,7 @@ public class ToggleGroupControl : MonoBehaviour
         // If the toggle was enabled notify the group
         if (state == true)
         {
-            result.text = toggle.GetComponentInChildren<Text>().text;
+            result.text = toggle.GetComponent<ToggleValue>().Value.ToString();
         }
     }
 

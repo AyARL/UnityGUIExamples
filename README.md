@@ -1,6 +1,6 @@
 UnityGUIExamples
 ================
-(31 Aug 2014)
+(3 Sep 2014)
 
 Scripting examples for the new Unity GUI.
 
@@ -36,6 +36,17 @@ This includes things such as OnPointerEnter, OnPointerExit, OnPointerClick etc.
 Can be used on object that don't support those events at all (eg. plain panels).
 
 Topmost element with the Event Trigger with capture all events.
+
+Flow Control
+================
+
+(3 Sep 2014)
+
+This is an example for setting up navigation for keyboard and controller where user can move between selectabe UI elements.
+
+NOTE: Most of the time you are probably better of setting this up in Editor via the Navigation field of the Selectable. 
+But if you do want to make changes through code, the example shows how to create custom Navigation and set the element to be selected by default.
+
 
 Toggle Group
 ================

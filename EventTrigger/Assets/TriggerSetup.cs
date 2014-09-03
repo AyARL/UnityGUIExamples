@@ -82,7 +82,8 @@ public class TriggerSetup : MonoBehaviour
 
     private void OnPointerClick(BaseEventData data)
     {
-        textField.text = "OnPointerClick " + data.selectedObject;
+        //textField.text = "OnPointerClick " + data.selectedObject;
+        Debug.Log("OnPointerClick ");
     }
 
     private void OnPointerEnter(Toggle toggle)

@@ -10,24 +10,19 @@ public class InputExample : MonoBehaviour
     private InputField inputField = null;
 
     [SerializeField]
-    private Button submitButton = null;
-
-    [SerializeField]
     private Text textDisplay = null;
-
-    UnityAction<string> inputAction = null;    // The InputField.onSubmit event sends one string argument that the action needs to accept
-    UnityAction buttonAction = null;
 
     // Use this for initialization
     void Start()
     {
-        // Add a listener to be executed when a submit key is pressed - Enter by default
-        inputAction = (value) => OnInputSubmitted(value); // value represents the argument that will be passed from InputField.OnSubmit
-        inputField.onSubmit.AddListener(inputAction);
-
-        // Add functionality to submit the InputField using a button
-        buttonAction = () => OnInputSubmitted(inputField.value); // capture the value of the InputField when the button is pressed
-        submitButton.onClick.AddListener(buttonAction);
+        // Add a Submit Event object with a listener.
+        /* Note: onEndEdit is called both when Submit key is pressed and when you click away from the field.
+         * If you want to build a larger form or not submit right away for any other reason, don't use this.
+         * Instead create a button that calls a function, which then reads the value of inputField.text
+         */
+        InputField.SubmitEvent submitEvent = new InputField.SubmitEvent();
+        submitEvent.AddListener(OnInputSubmitted);
+        inputField.onEndEdit = submitEvent;
     }
 
     private void OnInputSubmitted(string value)

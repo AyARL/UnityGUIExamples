@@ -1,5 +1,9 @@
 UnityGUIExamples
 ================
+Update 28 Nov 2014
+
+Updated the Default Events example for InputFields to Unity version 4.6.0f3
+
 (3 Sep 2014)
 
 Scripting examples for the new Unity GUI.
@@ -13,7 +17,7 @@ All examples are in C#.
 Default Events
 ================
 
-(31 Aug 2014)
+(28 Nov 2014)
 
 Shows how to subscribe to default events of:
 
